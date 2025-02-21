@@ -1,0 +1,39 @@
+<%- include("partials/header") %>
+   <a class="back_button" href="/">Terug</a>
+
+   <% if (weatherData.length > 0) { %>
+      <h2>Results</h2>
+
+      <!-- For every available datarow, add a new div -->
+      <% weatherData.forEach(weatherObject => { %>
+         <div class="weather_object">
+            <!-- Invisible form with button so that the user can perform a delete action on the database -->
+            <form class="invisible" id="weather_form_<%= weatherObject.id %>" method="post" href="/results">
+               <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+               <input type="hidden" name="id" value="<%= weatherObject.id %>" />
+            </form>
+            <button class="remove_icon_button" onclick="document.querySelector('#weather_form_<%= weatherObject.id %>').submit();">
+                <i class="remove_icon fa fa-trash-o"></i>
+            </button>
+
+            <!-- Actual data displayed -->
+            <div class="location_data">
+               <% if (weatherObject.countryCode) { %>
+                  <img class="country_flag" src='https://flagicons.lipis.dev/flags/4x3/<%= weatherObject.countryCode %>.svg' />
+                  <p class="city_country_text"><%= weatherObject.cityName %> (<%= weatherObject.countryName %>)</p>
+               <% } else { %>
+                  <p class="city_country_text"><%= weatherObject.cityName %></p>
+               <% } %>
+            </div>
+            <p class="datetime_created">Datum-tijd aangemaakt: <%= moment(weatherObject.createdAt).format("DD-MM-YY HH:mm:ss") %></p>
+            <p class="temperature"><%= weatherObject.temperature %>°</p>
+            <p class="description"><%= weatherObject.description %></p>
+        </div>
+      <% }) %>
+        
+   <!-- If there are no results-->
+   <% } else { %>
+      <p class="empty_message">Er zijn geen results gevonden doordat de achterliggende database leeg is.</p>
+   <% } %>
+
+<%- include("partials/footer") %>

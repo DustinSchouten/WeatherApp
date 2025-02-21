@@ -1,0 +1,29 @@
+{
+  "name": "weatherapp",
+  "version": "1.0.0",
+  "description": "App for fetching and storing city weather data from an external API. This project is meant to exercise with Node.js",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon --env-file=.env index.js",
+    "devMigrate": "node --env-file=.env databaseTableCreator.js"
+  },
+  "author": "Dustin Schouten",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cookie-parser": "^1.4.7",
+    "csurf": "^1.10.0",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-validator": "^7.2.1",
+    "moment": "^2.30.1",
+    "mysql2": "^3.12.0",
+    "node-fetch": "^3.3.2",
+    "sequelize": "^6.37.5"
+  }
+}

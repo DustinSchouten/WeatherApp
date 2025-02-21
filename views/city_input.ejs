@@ -1,0 +1,17 @@
+<%- include("partials/header") %>
+
+<a class="back_button" href="/">Terug</a>
+
+<h2>Voer stad in:</h2>
+
+<form method="post" href="/results">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input type="text" id="city" name="city" />
+    <input type="submit" id="submit_button" value="Verzend naar DB" />
+</form>
+
+<% if (errorMessage !== null) { %>
+   <p class="error_message"><%= errorMessage %></p>
+<% } %>
+
+<%- include("partials/footer") %>
